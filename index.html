@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DealQuote — Southwest Kia Dallas</title>
+<style>
+  :root {
+    --navy: #0f2340;
+    --navy2: #1a3a5c;
+    --accent: #c8102e;
+    --green: #1a7a3f;
+    --green-light: #e8f5ed;
+    --gold: #e8a020;
+    --gold-light: #fff8e8;
+    --blue-light: #e8f0fc;
+    --gray: #f4f5f7;
+    --border: #dde3ec;
+    --text: #1a2030;
+    --muted: #6b7280;
+    --white: #ffffff;
+    --shadow: 0 2px 12px rgba(15,35,64,0.10);
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #edf0f5; color: var(--text); min-height: 100vh; }
+
+  /* TOP NAV */
+  header { background: var(--navy); color: white; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); position: sticky; top: 0; z-index: 100; }
+  header .logo { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; }
+  header .logo span { color: #e02535; }
+  header .nav-actions { display: flex; gap: 10px; }
+  .btn { padding: 7px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; }
+  .btn-ghost { background: rgba(255,255,255,0.12); color: white; }
+  .btn-ghost:hover { background: rgba(255,255,255,0.22); }
+  .btn-accent { background: var(--accent); color: white; }
+  .btn-accent:hover { background: #a50d25; }
+  .btn-green { background: var(--green); color: white; }
+  .btn-green:hover { background: #155f32; }
+  .btn-navy { background: var(--navy2); color: white; }
+  .btn-navy:hover { background: #0f2340; }
+  .btn-outline { background: transparent; color: var(--navy); border: 1.5px solid var(--navy2); }
+  .btn-outline:hover { background: var(--navy); color: white; }
+
+  /* MAIN LAYOUT */
+  .main-wrap { max-width: 1280px; margin: 0 auto; padding: 20px 16px; }
+  .page-title { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+  .page-title .badge { font-size: 11px; background: var(--accent); color: white; padding: 3px 8px; border-radius: 20px; font-weight: 700; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* CARDS */
+  .card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .card-header { background: var(--navy); color: white; padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+  .card-header .icon { font-size: 14px; }
+  .card-body { padding: 16px; }
+
+  /* FORM ELEMENTS */
+  .field { margin-bottom: 12px; }
+  .field label { display: block; font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .field input, .field select { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 14px; color: var(--text); background: white; transition: border-color 0.15s; }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--navy2); background: var(--blue-light); }
+  .field input.currency { text-align: right; font-weight: 600; }
+  .field input.pct { text-align: right; font-weight: 600; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .field-row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+  /* CALC ROWS */
+  .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; }
+  .calc-row:last-child { border-bottom: none; }
+  .calc-row.total { font-weight: 800; font-size: 15px; color: var(--navy); padding-top: 10px; border-top: 2px solid var(--navy); border-bottom: none; }
+  .calc-row.subtotal { font-weight: 700; color: var(--green); }
+  .calc-row .val { font-weight: 600; font-family: 'Courier New', monospace; font-size: 13px; }
+  .calc-row .val.neg { color: var(--accent); }
+  .calc-row .val.pos { color: var(--green); }
+  .calc-row .val.big { font-size: 18px; font-weight: 800; color: var(--navy); }
+
+  /* PAYMENT GRID */
+  .pmt-grid { width: 100%; border-collapse: collapse; margin-top: 6px; }
+  .pmt-grid th { background: var(--navy); color: white; padding: 8px 10px; font-size: 11px; text-align: center; font-weight: 700; letter-spacing: 0.5px; }
+  .pmt-grid th.rate-col { background: #1a3a5c; font-size: 10px; }
+  .pmt-grid td { padding: 8px 10px; text-align: center; font-size: 13px; border-bottom: 1px solid var(--border); }
+  .pmt-grid tr:hover td { background: var(--blue-light); }
+  .pmt-grid .pmt-val { font-weight: 800; font-size: 15px; color: var(--navy); font-family: 'Courier New', monospace; }
+  .pmt-grid .pmt-val.sell { color: var(--green); }
+  .pmt-grid .term-cell { font-weight: 700; color: var(--navy); background: #f8f9fb; font-size: 13px; }
+  .pmt-grid .rate-badge { font-size: 10px; padding: 2px 6px; border-radius: 10px; font-weight: 700; }
+  .pmt-grid .buy-badge { background: #dbeafe; color: #1e40af; }
+  .pmt-grid .sell-badge { background: var(--green-light); color: var(--green); }
+
+  /* RESERVE TABLE */
+  .reserve-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .reserve-table th { background: var(--navy2); color: white; padding: 7px 10px; font-size: 11px; text-align: center; font-weight: 700; }
+  .reserve-table td { padding: 7px 10px; text-align: center; font-size: 12px; border-bottom: 1px solid var(--border); }
+  .reserve-table .dealer-val { font-weight: 800; color: var(--green); font-size: 14px; }
+  .reserve-table tr:hover td { background: var(--green-light); }
+
+  /* F&I PRODUCTS */
+  .fi-row { display: grid; grid-template-columns: 1fr 110px 110px 100px; gap: 8px; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0f0f0; }
+  .fi-row:last-child { border-bottom: none; }
+  .fi-row .fi-label { font-size: 13px; font-weight: 500; }
+  .fi-row input { padding: 6px 10px; border: 1.5px solid var(--border); border-radius: 5px; font-size: 13px; text-align: right; width: 100%; }
+  .fi-row input:focus { outline: none; border-color: var(--green); }
+  .fi-gross { font-weight: 800; color: var(--green); font-size: 13px; text-align: right; padding: 6px 0; font-family: 'Courier New', monospace; }
+  .fi-header-row { display: grid; grid-template-columns: 1fr 110px 110px 100px; gap: 8px; padding: 4px 0 8px; }
+  .fi-header-row span { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .fi-header-row span:not(:first-child) { text-align: right; }
+
+  /* GROSS SUMMARY */
+  .gross-box { background: var(--navy); color: white; border-radius: 8px; padding: 16px; margin-top: 16px; }
+  .gross-box .gross-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .gross-box .gross-row:last-child { border-bottom: none; padding-top: 12px; font-size: 18px; font-weight: 900; border-top: 1px solid rgba(255,255,255,0.3); margin-top: 4px; }
+  .gross-box .gross-row .gval { font-family: 'Courier New', monospace; font-weight: 700; color: #4ade80; }
+  .gross-box .gross-row:last-child .gval { font-size: 22px; color: #4ade80; }
+
+  /* PRINT PENCIL */
+  .print-pencil { background: white; border: 2px solid var(--navy); border-radius: var(--radius); padding: 24px; display: none; }
+  .print-pencil.active { display: block; }
+  .pencil-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--navy); }
+  .pencil-logo { font-size: 20px; font-weight: 900; color: var(--accent); }
+  .pencil-meta { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.8; }
+  .pencil-meta strong { color: var(--navy); }
+  .pencil-section { margin-bottom: 14px; }
+  .pencil-section h3 { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: white; background: var(--navy); padding: 4px 10px; margin-bottom: 8px; border-radius: 3px; }
+  .pencil-row { display: flex; justify-content: space-between; font-size: 12px; padding: 3px 0; border-bottom: 1px dotted #ddd; }
+  .pencil-row:last-child { border-bottom: none; }
+  .pencil-row.bold { font-weight: 800; font-size: 13px; }
+  .pencil-pmt-grid { width: 100%; border-collapse: collapse; }
+  .pencil-pmt-grid th { background: var(--navy); color: white; padding: 6px 10px; font-size: 11px; text-align: center; }
+  .pencil-pmt-grid td { padding: 8px 10px; text-align: center; font-size: 14px; font-weight: 700; border: 1px solid var(--border); }
+  .pencil-pmt-grid td.term { background: #f8f9fb; font-size: 12px; }
+  .pencil-note { font-size: 10px; color: var(--muted); margin-top: 6px; font-style: italic; }
+  .pencil-sig { margin-top: 20px; display: flex; gap: 40px; }
+  .pencil-sig .sig-line { flex: 1; }
+  .pencil-sig .sig-line .line { border-bottom: 1px solid #333; margin-top: 28px; margin-bottom: 4px; }
+  .pencil-sig .sig-line .sig-label { font-size: 10px; color: var(--muted); }
+
+  /* TABS */
+  .tabs { display: flex; gap: 2px; background: var(--border); border-radius: 8px; padding: 3px; margin-bottom: 16px; }
+  .tab { flex: 1; padding: 8px; text-align: center; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; color: var(--muted); transition: all 0.15s; }
+  .tab.active { background: white; color: var(--navy); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); margin: 14px 0; }
+
+  /* STATUS BAR */
+  .status-bar { background: var(--green-light); border: 1px solid #a7d8b8; border-radius: 6px; padding: 8px 14px; font-size: 12px; color: var(--green); font-weight: 600; margin-bottom: 14px; display: none; }
+  .status-bar.show { display: flex; align-items: center; gap: 8px; }
+
+  /* PRINT STYLES */
+  @media print {
+    body * { visibility: hidden; }
+    #printArea, #printArea * { visibility: visible; }
+    #printArea { position: fixed; top: 0; left: 0; width: 100%; background: white; }
+    header, .main-wrap > *:not(#printArea) { display: none !important; }
+  }
+
+  @media (max-width: 768px) {
+    .grid2, .grid3 { grid-template-columns: 1fr; }
+    .fi-row { grid-template-columns: 1fr 90px 90px 80px; }
+  }
+
+  .tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
+  .tag-blue { background: #dbeafe; color: #1e40af; }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-orange { background: #fff3cd; color: #8a6000; }
+
+  .sep { height: 10px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">DEAL<span>QUOTE</span> &nbsp;|&nbsp; <span style="font-size:13px;font-weight:500;opacity:0.7">Southwest Kia Dallas</span></div>
+  <div class="nav-actions">
+    <button class="btn btn-ghost" onclick="clearDeal()">New Deal</button>
+    <button class="btn btn-accent" onclick="showPencil()">Print Pencil</button>
+  </div>
+</header>
+
+<div class="main-wrap">
+  <div class="page-title">Build a Pencil <span class="badge">LIVE CALC</span></div>
+
+  <div id="statusBar" class="status-bar">✓ Deal updated</div>
+
+  <!-- ROW 1: Vehicle + Customer + Trade -->
+  <div class="grid3" style="margin-bottom:16px">
+
+    <!-- VEHICLE -->
+    <div class="card">
+      <div class="card-header"><span class="icon">🚗</span> Vehicle</div>
+      <div class="card-body">
+        <div class="field"><label>Year / Make / Model</label><input type="text" id="vehicle" placeholder="2026 Kia Telluride SX-P" oninput="calc()"></div>
+        <div class="field-row">
+          <div class="field"><label>Stock #</label><input type="text" id="stock" placeholder="TE310598" oninput="calc()"></div>
+          <div class="field"><label>New / Used</label>
+            <select id="newused" onchange="calc()"><option>New</option><option>Used</option></select>
+          </div>
+        </div>
+        <div class="field"><label>Selling Price</label><input type="text" id="sellingPrice" class="currency" placeholder="$0.00" oninput="calc()"></div>
+        <div class="field-row">
+          <div class="field"><label>Dealer Discount</label><input type="text" id="discount" class="currency" placeholder="$0.00" oninput="calc()"></div>
+          <div class="field"><label>Rebate</label><input type="text" id="rebate" class="currency" placeholder="$0.00" oninput="calc()"></div>
+        </div>
+        <div class="field"><label>Add-Ons / Accessories</label><input type="text" id="addons" class="currency" placeholder="$0.00" oninput="calc()"></div>
+      </div>
+    </div>
+
+    <!-- CUSTOMER + PRICING SUMMARY -->
+    <div class="card">
+      <div class="card-header"><span class="icon">📋</span> Customer & Fees</div>
+      <div class="card-body">
+        <div class="field"><label>Customer Name</label><input type="text" id="custName" placeholder="First Last" oninput="calc()"></div>
+        <div class="field-row">
+          <div class="field"><label>Salesperson</label><input type="text" id="spName" placeholder="Name" oninput="calc()"></div>
+          <div class="field"><label>Manager</label><input type="text" id="mgName" placeholder="Name" oninput="calc()"></div>
+        </div>
+        <div class="divider"></div>
+        <div class="calc-row"><span>Adjusted Price</span><span class="val" id="adjPrice">$0.00</span></div>
+        <div class="calc-row"><span>Sales Tax (6.25%)</span><span class="val" id="taxAmt">$0.00</span></div>
+        <div class="calc-row"><span>Doc Fee</span><span class="val">$225.00</span></div>
+        <div class="calc-row"><span>Non-Tax Fees (Title & Reg)</span><span class="val" id="ntfAmt">—</span></div>
+        <div class="field" style="margin-top:8px">
+          <label>Non-Tax Fees</label>
+          <input type="text" id="ntf" class="currency" value="300" oninput="calc()">
+        </div>
+        <div class="calc-row total"><span>Total Tax & Fees</span><span class="val" id="totalFees">$0.00</span></div>
+      </div>
+    </div>
+
+    <!-- TRADE -->
+    <div class="card">
+      <div class="card-header"><span class="icon">🔄</span> Trade-In</div>
+      <div class="card-body">
+        <div class="field"><label>Trade Vehicle</label><input type="text" id="tradeVeh" placeholder="2022 Ford F-150" oninput="calc()"></div>
+        <div class="field"><label>Trade ACV (Value)</label><input type="text" id="tradeACV" class="currency" placeholder="$0.00" oninput="calc()"></div>
+        <div class="field"><label>Trade Payoff</label><input type="text" id="tradePayoff" class="currency" placeholder="$0.00" oninput="calc()"></div>
+        <div class="divider"></div>
+        <div class="calc-row subtotal"><span>Net Trade Equity</span><span class="val pos" id="tradeEquity">$0.00</span></div>
+        <div class="divider"></div>
+        <div class="calc-row"><span>Cash Down</span><span class="val" id="cashDownDisp">$0.00</span></div>
+        <div class="calc-row total"><span>Amount Financed</span><span class="val big" id="amtFinanced">$0.00</span></div>
+        <div class="field" style="margin-top:8px">
+          <label>Cash Down</label>
+          <input type="text" id="cashDown" class="currency" placeholder="$0.00" oninput="calc()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2: Rates + Payments + Reserve -->
+  <div class="grid2" style="margin-bottom:16px">
+
+    <!-- RATES + PAYMENT GRID -->
+    <div class="card">
+      <div class="card-header"><span class="icon">📊</span> Loan Terms & Payment Grid</div>
+      <div class="card-body">
+        <div class="field-row3">
+          <div class="field"><label>Buy Rate (APR)</label><input type="text" id="buyRate" class="pct" placeholder="7.99%" value="7.99" oninput="calc()"></div>
+          <div class="field"><label>Sell Rate (APR)</label><input type="text" id="sellRate" class="pct" placeholder="8.99%" value="8.99" oninput="calc()"></div>
+          <div class="field"><label>Rate Spread</label><input type="text" id="rateSpread" class="pct" readonly style="background:#f8f9fb;color:#666"></div>
+        </div>
+        <div class="field-row" style="margin-bottom:10px">
+          <div class="field"><label>Terms (months — up to 4)</label>
+            <input type="text" id="terms" placeholder="36,48,60,72" value="36,48,60,72" oninput="calc()">
+          </div>
+          <div class="field"><label>Cash Down Scenarios (up to 4)</label>
+            <input type="text" id="downScenarios" placeholder="700,1000,2000,3000" value="700,1000,2000,3000" oninput="calc()">
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="pmt-grid" id="pmtGrid">
+            <thead><tr id="pmtHead"></tr></thead>
+            <tbody id="pmtBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESERVE -->
+    <div class="card">
+      <div class="card-header"><span class="icon">💰</span> Dealer Reserve (80/20)</div>
+      <div class="card-body">
+        <p style="font-size:11px;color:var(--muted);margin-bottom:10px">Reserve calculated on Down Scenario 1. Spread × Term × 80%.</p>
+        <div style="overflow-x:auto">
+          <table class="reserve-table" id="reserveTable">
+            <thead><tr>
+              <th>Term</th><th>Amt Fin</th><th>Buy Pmt</th><th>Sell Pmt</th>
+              <th>Spread/Mo</th><th>Total Reserve</th><th>Dealer 80%</th>
+            </tr></thead>
+            <tbody id="reserveBody"></tbody>
+          </table>
+        </div>
+        <div class="divider"></div>
+        <div class="calc-row">
+          <span>Est. Reserve (Term 1)</span>
+          <span class="val pos" id="estReserve">$0.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 3: F&I Backend + Total Gross -->
+  <div class="grid2" style="margin-bottom:16px">
+
+    <!-- F&I BACKEND -->
+    <div class="card">
+      <div class="card-header"><span class="icon">🛡️</span> F&I Backend Products</div>
+      <div class="card-body">
+        <div class="fi-header-row">
+          <span>Product</span><span>Dealer Cost</span><span>Retail Price</span><span>Gross</span>
+        </div>
+        <div id="fiProducts"></div>
+        <div class="divider"></div>
+        <div class="calc-row subtotal">
+          <span>Total F&I Backend Gross</span>
+          <span class="val pos" id="totalFIGross">$0.00</span>
+        </div>
+        <div class="divider"></div>
+        <div style="background:var(--gold-light);border:1px solid #f0c060;border-radius:6px;padding:10px;margin-top:6px;font-size:12px;color:#6b4e00;">
+          <strong>⚠️ Print Pencil Note:</strong> Backend products are included in the payment but <strong>NOT itemized</strong> on the customer pencil. Only total payment shows.
+        </div>
+      </div>
+    </div>
+
+    <!-- GROSS SUMMARY -->
+    <div class="card">
+      <div class="card-header"><span class="icon">📈</span> Deal Gross Summary</div>
+      <div class="card-body">
+        <div class="field"><label>Invoice / Vehicle Cost (for front gross)</label>
+          <input type="text" id="invoice" class="currency" placeholder="$0.00" oninput="calc()">
+        </div>
+        <div class="divider"></div>
+        <div class="calc-row"><span>Adjusted Sale Price</span><span class="val" id="gs_adjPrice">$0.00</span></div>
+        <div class="calc-row"><span>Invoice / Cost</span><span class="val" id="gs_invoice">$0.00</span></div>
+        <div class="calc-row subtotal"><span>Front End Gross</span><span class="val pos" id="gs_frontGross">$0.00</span></div>
+        <div class="divider"></div>
+        <div class="calc-row"><span>Reserve (80% / Term 1 / Down 1)</span><span class="val pos" id="gs_reserve">$0.00</span></div>
+        <div class="calc-row"><span>F&I Backend Gross</span><span class="val pos" id="gs_fi">$0.00</span></div>
+        <div class="gross-box">
+          <div class="gross-row"><span>Front Gross</span><span class="gval" id="gb_front">$0.00</span></div>
+          <div class="gross-row"><span>Reserve (Dealer 80%)</span><span class="gval" id="gb_reserve">$0.00</span></div>
+          <div class="gross-row"><span>F&I Backend</span><span class="gval" id="gb_fi">$0.00</span></div>
+          <div class="gross-row"><span>TOTAL DEAL GROSS</span><span class="gval" id="gb_total">$0.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINT PENCIL -->
+  <div id="printArea">
+    <div class="print-pencil" id="pencilOut"></div>
+  </div>
+</div>
+
+<script>
+const FI_PRODUCTS = [
+  'VSC / Extended Warranty',
+  'GAP Insurance',
+  'Paint / Interior Protection',
+  'Tire & Wheel',
+  'Life / Disability',
+  'Other F&I Product'
+];
+
+// Build F&I rows
+const fiContainer = document.getElementById('fiProducts');
+FI_PRODUCTS.forEach((p, i) => {
+  const row = document.createElement('div');
+  row.className = 'fi-row';
+  row.innerHTML = `
+    <div class="fi-label">${p}</div>
+    <input type="text" id="fiCost${i}" class="currency" placeholder="$0" oninput="calc()">
+    <input type="text" id="fiRetail${i}" class="currency" placeholder="$0" oninput="calc()">
+    <div class="fi-gross" id="fiGross${i}">$0</div>
+  `;
+  fiContainer.appendChild(row);
+});
+
+function parseMoney(val) {
+  if (!val) return 0;
+  return parseFloat(String(val).replace(/[$,\s]/g, '')) || 0;
+}
+function parsePct(val) {
+  if (!val) return 0;
+  return parseFloat(String(val).replace(/%/g, '')) || 0;
+}
+function fmt(n) {
+  if (isNaN(n)) return '$0.00';
+  return '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+function pmt(rate, nper, pv) {
+  if (rate === 0) return pv / nper;
+  const r = rate / 12;
+  return (pv * r * Math.pow(1+r, nper)) / (Math.pow(1+r, nper) - 1);
+}
+
+function calc() {
+  // Pricing
+  const price    = parseMoney(document.getElementById('sellingPrice').value);
+  const disc     = parseMoney(document.getElementById('discount').value);
+  const reb      = parseMoney(document.getElementById('rebate').value);
+  const adds     = parseMoney(document.getElementById('addons').value);
+  const adjPrice = price - disc - reb + adds;
+  const tax      = adjPrice * 0.0625;
+  const docFee   = 225;
+  const ntf      = parseMoney(document.getElementById('ntf').value) || 300;
+  const totalFees= tax + docFee + ntf;
+
+  // Trade
+  const acv      = parseMoney(document.getElementById('tradeACV').value);
+  const payoff   = parseMoney(document.getElementById('tradePayoff').value);
+  const equity   = acv - payoff;
+  const cashDown = parseMoney(document.getElementById('cashDown').value);
+
+  // Total financed (backend NOT included here — in payments only)
+  const baseFin  = adjPrice + totalFees - equity - cashDown;
+
+  // F&I backend
+  let totalFI = 0;
+  FI_PRODUCTS.forEach((p, i) => {
+    const cost   = parseMoney(document.getElementById(`fiCost${i}`).value);
+    const retail = parseMoney(document.getElementById(`fiRetail${i}`).value);
+    const gross  = retail - cost;
+    totalFI += gross;
+    document.getElementById(`fiGross${i}`).textContent = fmt(gross);
+    document.getElementById(`fiGross${i}`).style.color = gross >= 0 ? 'var(--green)' : 'var(--accent)';
+  });
+
+  // F&I retail total (added to financed for payments)
+  let fiRetailTotal = 0;
+  FI_PRODUCTS.forEach((p, i) => {
+    fiRetailTotal += parseMoney(document.getElementById(`fiRetail${i}`).value);
+  });
+  const totalFinanced = baseFin + fiRetailTotal;
+
+  // Rates
+  const buyRate  = parsePct(document.getElementById('buyRate').value) / 100;
+  const sellRate = parsePct(document.getElementById('sellRate').value) / 100;
+  const spread   = sellRate - buyRate;
+  document.getElementById('rateSpread').value = (spread * 100).toFixed(3) + '%';
+
+  // Terms & Down scenarios
+  const termsRaw = document.getElementById('terms').value.split(',').map(t => parseInt(t.trim())).filter(t => !isNaN(t) && t > 0).slice(0,4);
+  const downsRaw = document.getElementById('downScenarios').value.split(',').map(d => parseMoney(d)).filter(d => !isNaN(d)).slice(0,4);
+
+  // Update display values
+  document.getElementById('adjPrice').textContent = fmt(adjPrice);
+  document.getElementById('taxAmt').textContent = fmt(tax);
+  document.getElementById('ntfAmt').textContent = fmt(ntf);
+  document.getElementById('totalFees').textContent = fmt(totalFees);
+  document.getElementById('tradeEquity').textContent = (equity < 0 ? '-' : '') + fmt(equity);
+  document.getElementById('tradeEquity').className = 'val ' + (equity >= 0 ? 'pos' : 'neg');
+  document.getElementById('cashDownDisp').textContent = fmt(cashDown);
+  document.getElementById('amtFinanced').textContent = fmt(totalFinanced);
+  document.getElementById('totalFIGross').textContent = fmt(totalFI);
+
+  // Gross summary
+  const invoice  = parseMoney(document.getElementById('invoice').value);
+  const frontGross = adjPrice - invoice;
+  document.getElementById('gs_adjPrice').textContent = fmt(adjPrice);
+  document.getElementById('gs_invoice').textContent = fmt(invoice);
+  document.getElementById('gs_frontGross').textContent = fmt(frontGross);
+
+  // Payment grid
+  const head = document.getElementById('pmtHead');
+  const body = document.getElementById('pmtBody');
+  head.innerHTML = '<th>Term</th>';
+  downsRaw.forEach(d => { head.innerHTML += `<th>Down: ${fmt(d)}</th>`; });
+  head.innerHTML += '<th class="rate-col">Rate</th>';
+
+  body.innerHTML = '';
+  termsRaw.forEach(term => {
+    // Buy rate row
+    let bRow = `<tr><td class="term-cell">${term} mo <span class="rate-badge buy-badge">BUY</span></td>`;
+    downsRaw.forEach(d => {
+      const fin = baseFin + fiRetailTotal - d + cashDown; // recalc with this down
+      const finAdj = adjPrice + totalFees - equity - d + fiRetailTotal;
+      const p = pmt(buyRate, term, Math.max(0, finAdj));
+      bRow += `<td><span class="pmt-val">${fmt(p)}</span></td>`;
+    });
+    bRow += `<td class="rate-col">${(buyRate*100).toFixed(3)}%</td></tr>`;
+
+    // Sell rate row
+    let sRow = `<tr><td class="term-cell">${term} mo <span class="rate-badge sell-badge">SELL</span></td>`;
+    downsRaw.forEach(d => {
+      const finAdj = adjPrice + totalFees - equity - d + fiRetailTotal;
+      const p = pmt(sellRate, term, Math.max(0, finAdj));
+      sRow += `<td><span class="pmt-val sell">${fmt(p)}</span></td>`;
+    });
+    sRow += `<td class="rate-col">${(sellRate*100).toFixed(3)}%</td></tr>`;
+
+    body.innerHTML += bRow + sRow;
+  });
+
+  // Reserve table
+  const down1 = downsRaw[0] || 0;
+  const reserveBody = document.getElementById('reserveBody');
+  reserveBody.innerHTML = '';
+  let firstReserve = 0;
+  termsRaw.forEach((term, idx) => {
+    const finAdj = adjPrice + totalFees - equity - down1 + fiRetailTotal;
+    const buyP   = pmt(buyRate, term, Math.max(0, finAdj));
+    const sellP  = pmt(sellRate, term, Math.max(0, finAdj));
+    const spreadPmt = sellP - buyP;
+    const totalRes  = spreadPmt * term;
+    const dealer80  = totalRes * 0.8;
+    if (idx === 0) firstReserve = dealer80;
+    reserveBody.innerHTML += `
+      <tr>
+        <td>${term} mo</td>
+        <td>${fmt(finAdj)}</td>
+        <td>${fmt(buyP)}</td>
+        <td>${fmt(sellP)}</td>
+        <td>${fmt(spreadPmt)}</td>
+        <td>${fmt(totalRes)}</td>
+        <td><strong class="dealer-val">${fmt(dealer80)}</strong></td>
+      </tr>`;
+  });
+  document.getElementById('estReserve').textContent = fmt(firstReserve);
+  document.getElementById('gs_reserve').textContent = fmt(firstReserve);
+  document.getElementById('gs_fi').textContent = fmt(totalFI);
+  document.getElementById('gb_front').textContent = fmt(frontGross);
+  document.getElementById('gb_reserve').textContent = fmt(firstReserve);
+  document.getElementById('gb_fi').textContent = fmt(totalFI);
+  document.getElementById('gb_total').textContent = fmt(frontGross + firstReserve + totalFI);
+
+  // Store for pencil
+  window._dealData = { adjPrice, totalFees, tax, equity, cashDown, totalFinanced, buyRate, sellRate, termsRaw, downsRaw, fiRetailTotal, down1, firstReserve, totalFI, frontGross };
+}
+
+function showPencil() {
+  calc();
+  const d = window._dealData || {};
+  const vehicle   = document.getElementById('vehicle').value || '—';
+  const stock     = document.getElementById('stock').value || '—';
+  const newused   = document.getElementById('newused').value;
+  const custName  = document.getElementById('custName').value || '—';
+  const spName    = document.getElementById('spName').value || '—';
+  const mgName    = document.getElementById('mgName').value || '—';
+  const tradeVeh  = document.getElementById('tradeVeh').value;
+  const now       = new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+
+  // Build payment rows for pencil — SELL rate only, with down scenarios
+  const { termsRaw, downsRaw, adjPrice, totalFees, equity, fiRetailTotal, sellRate } = d || {};
+  let pmtHeadHtml = '<tr><th>Term</th>';
+  (downsRaw||[]).forEach(dn => { pmtHeadHtml += `<th>Down: ${fmt(dn)}</th>`; });
+  pmtHeadHtml += '</tr>';
+
+  let pmtBodyHtml = '';
+  (termsRaw||[]).forEach(term => {
+    pmtBodyHtml += `<tr><td class="term">${term} Months</td>`;
+    (downsRaw||[]).forEach(dn => {
+      const finAdj = (adjPrice||0) + (totalFees||0) - (equity||0) - dn + (fiRetailTotal||0);
+      const p = pmt(sellRate||0, term, Math.max(0, finAdj));
+      pmtBodyHtml += `<td>${fmt(p)}</td>`;
+    });
+    pmtBodyHtml += '</tr>';
+  });
+
+  const pencilEl = document.getElementById('pencilOut');
+  pencilEl.className = 'print-pencil active';
+  pencilEl.innerHTML = `
+    <div class="pencil-header">
+      <div>
+        <div class="pencil-logo">KIA &nbsp; Movement that inspires</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:4px">Southwest Kia Dallas &nbsp;|&nbsp; FOR INTERNAL USE ONLY</div>
+      </div>
+      <div class="pencil-meta">
+        <div>Date: <strong>${now}</strong></div>
+        <div>Salesperson: <strong>${spName}</strong></div>
+        <div>Manager: <strong>${mgName}</strong></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:14px">
+      <div>
+        <div class="pencil-section">
+          <h3>Customer</h3>
+          <div class="pencil-row"><span>Name:</span><span>${custName}</span></div>
+        </div>
+        <div class="pencil-section">
+          <h3>Vehicle</h3>
+          <div class="pencil-row"><span>Vehicle:</span><span><strong>${vehicle}</strong></span></div>
+          <div class="pencil-row"><span>Stock #:</span><span>${stock}</span></div>
+          <div class="pencil-row"><span>Condition:</span><span>${newused}</span></div>
+          ${tradeVeh ? `<div class="pencil-row"><span>Trade-In:</span><span>${tradeVeh}</span></div>` : ''}
+        </div>
+      </div>
+      <div>
+        <div class="pencil-section">
+          <h3>Price Breakdown</h3>
+          <div class="pencil-row"><span>Selling Price</span><span>${fmt(parseMoney(document.getElementById('sellingPrice').value))}</span></div>
+          <div class="pencil-row"><span>Discount</span><span>${fmt(parseMoney(document.getElementById('discount').value))}</span></div>
+          <div class="pencil-row"><span>Rebate</span><span>${fmt(parseMoney(document.getElementById('rebate').value))}</span></div>
+          <div class="pencil-row bold"><span>Adjusted Price</span><span>${fmt(d.adjPrice||0)}</span></div>
+          <div class="pencil-row"><span>Sales Tax (6.25%)</span><span>${fmt(d.tax||0)}</span></div>
+          <div class="pencil-row"><span>Doc Fee</span><span>$225.00</span></div>
+          <div class="pencil-row"><span>Non-Tax Fees</span><span>${fmt(parseMoney(document.getElementById('ntf').value)||300)}</span></div>
+          <div class="pencil-row bold"><span>Trade Equity (Net)</span><span>${fmt(d.equity||0)}</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pencil-section">
+      <h3>Estimated Monthly Payments &nbsp; <span style="font-weight:400;font-size:10px">Includes all financed products</span></h3>
+      <table class="pencil-pmt-grid">
+        <thead>${pmtHeadHtml}</thead>
+        <tbody>${pmtBodyHtml}</tbody>
+      </table>
+      <div class="pencil-note">* A.P.R. subject to credit approval and equity requirements. Payment includes all financed products.</div>
+    </div>
+
+    <div class="pencil-sig">
+      <div class="sig-line"><div class="line"></div><div class="sig-label">Customer Approval</div></div>
+      <div class="sig-line"><div class="line"></div><div class="sig-label">Management Approval</div></div>
+    </div>
+  `;
+
+  pencilEl.scrollIntoView({behavior:'smooth'});
+  setTimeout(() => window.print(), 300);
+}
+
+function clearDeal() {
+  const inputs = document.querySelectorAll('input[type=text]');
+  inputs.forEach(i => {
+    if (!['ntf','buyRate','sellRate','terms','downScenarios'].includes(i.id)) i.value = '';
+  });
+  document.getElementById('pencilOut').className = 'print-pencil';
+  calc();
+}
+
+// Initial calc
+calc();
+</script>
+</body>
+</html>
