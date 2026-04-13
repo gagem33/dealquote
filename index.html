@@ -24,7 +24,7 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', system-ui, sans-serif; background: #edf0f5; color: var(--text); min-height: 100vh; }
-
+ 
   /* TOP NAV */
   header { background: var(--navy); color: white; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 56px; box-shadow: 0 2px 8px rgba(0,0,0,0.25); position: sticky; top: 0; z-index: 100; }
   header .logo { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; }
@@ -41,21 +41,21 @@
   .btn-navy:hover { background: #0f2340; }
   .btn-outline { background: transparent; color: var(--navy); border: 1.5px solid var(--navy2); }
   .btn-outline:hover { background: var(--navy); color: white; }
-
+ 
   /* MAIN LAYOUT */
   .main-wrap { max-width: 1280px; margin: 0 auto; padding: 20px 16px; }
   .page-title { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
   .page-title .badge { font-size: 11px; background: var(--accent); color: white; padding: 3px 8px; border-radius: 20px; font-weight: 700; }
-
+ 
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-
+ 
   /* CARDS */
   .card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
   .card-header { background: var(--navy); color: white; padding: 10px 16px; font-size: 12px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
   .card-header .icon { font-size: 14px; }
   .card-body { padding: 16px; }
-
+ 
   /* FORM ELEMENTS */
   .field { margin-bottom: 12px; }
   .field label { display: block; font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
@@ -65,7 +65,7 @@
   .field input.pct { text-align: right; font-weight: 600; }
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .field-row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-
+ 
   /* CALC ROWS */
   .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; }
   .calc-row:last-child { border-bottom: none; }
@@ -75,7 +75,7 @@
   .calc-row .val.neg { color: var(--accent); }
   .calc-row .val.pos { color: var(--green); }
   .calc-row .val.big { font-size: 18px; font-weight: 800; color: var(--navy); }
-
+ 
   /* PAYMENT GRID */
   .pmt-grid { width: 100%; border-collapse: collapse; margin-top: 6px; }
   .pmt-grid th { background: var(--navy); color: white; padding: 8px 10px; font-size: 11px; text-align: center; font-weight: 700; letter-spacing: 0.5px; }
@@ -88,14 +88,14 @@
   .pmt-grid .rate-badge { font-size: 10px; padding: 2px 6px; border-radius: 10px; font-weight: 700; }
   .pmt-grid .buy-badge { background: #dbeafe; color: #1e40af; }
   .pmt-grid .sell-badge { background: var(--green-light); color: var(--green); }
-
+ 
   /* RESERVE TABLE */
   .reserve-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
   .reserve-table th { background: var(--navy2); color: white; padding: 7px 10px; font-size: 11px; text-align: center; font-weight: 700; }
   .reserve-table td { padding: 7px 10px; text-align: center; font-size: 12px; border-bottom: 1px solid var(--border); }
   .reserve-table .dealer-val { font-weight: 800; color: var(--green); font-size: 14px; }
   .reserve-table tr:hover td { background: var(--green-light); }
-
+ 
   /* F&I PRODUCTS */
   .fi-row { display: grid; grid-template-columns: 1fr 110px 110px 100px; gap: 8px; align-items: center; padding: 6px 0; border-bottom: 1px solid #f0f0f0; }
   .fi-row:last-child { border-bottom: none; }
@@ -106,14 +106,14 @@
   .fi-header-row { display: grid; grid-template-columns: 1fr 110px 110px 100px; gap: 8px; padding: 4px 0 8px; }
   .fi-header-row span { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
   .fi-header-row span:not(:first-child) { text-align: right; }
-
+ 
   /* GROSS SUMMARY */
   .gross-box { background: var(--navy); color: white; border-radius: 8px; padding: 16px; margin-top: 16px; }
   .gross-box .gross-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.1); }
   .gross-box .gross-row:last-child { border-bottom: none; padding-top: 12px; font-size: 18px; font-weight: 900; border-top: 1px solid rgba(255,255,255,0.3); margin-top: 4px; }
   .gross-box .gross-row .gval { font-family: 'Courier New', monospace; font-weight: 700; color: #4ade80; }
   .gross-box .gross-row:last-child .gval { font-size: 22px; color: #4ade80; }
-
+ 
   /* PRINT PENCIL */
   .print-pencil { background: white; border: 2px solid var(--navy); border-radius: var(--radius); padding: 24px; display: none; }
   .print-pencil.active { display: block; }
@@ -135,19 +135,19 @@
   .pencil-sig .sig-line { flex: 1; }
   .pencil-sig .sig-line .line { border-bottom: 1px solid #333; margin-top: 28px; margin-bottom: 4px; }
   .pencil-sig .sig-line .sig-label { font-size: 10px; color: var(--muted); }
-
+ 
   /* TABS */
   .tabs { display: flex; gap: 2px; background: var(--border); border-radius: 8px; padding: 3px; margin-bottom: 16px; }
   .tab { flex: 1; padding: 8px; text-align: center; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; color: var(--muted); transition: all 0.15s; }
   .tab.active { background: white; color: var(--navy); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
-
+ 
   /* DIVIDER */
   .divider { height: 1px; background: var(--border); margin: 14px 0; }
-
+ 
   /* STATUS BAR */
   .status-bar { background: var(--green-light); border: 1px solid #a7d8b8; border-radius: 6px; padding: 8px 14px; font-size: 12px; color: var(--green); font-weight: 600; margin-bottom: 14px; display: none; }
   .status-bar.show { display: flex; align-items: center; gap: 8px; }
-
+ 
   /* PRINT STYLES */
   @media print {
     body * { visibility: hidden; }
@@ -155,22 +155,22 @@
     #printArea { position: fixed; top: 0; left: 0; width: 100%; background: white; }
     header, .main-wrap > *:not(#printArea) { display: none !important; }
   }
-
+ 
   @media (max-width: 768px) {
     .grid2, .grid3 { grid-template-columns: 1fr; }
     .fi-row { grid-template-columns: 1fr 90px 90px 80px; }
   }
-
+ 
   .tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; }
   .tag-blue { background: #dbeafe; color: #1e40af; }
   .tag-green { background: var(--green-light); color: var(--green); }
   .tag-orange { background: #fff3cd; color: #8a6000; }
-
+ 
   .sep { height: 10px; }
 </style>
 </head>
 <body>
-
+ 
 <header>
   <div class="logo">DEAL<span>QUOTE</span> &nbsp;|&nbsp; <span style="font-size:13px;font-weight:500;opacity:0.7">Southwest Kia Dallas</span></div>
   <div class="nav-actions">
@@ -178,15 +178,15 @@
     <button class="btn btn-accent" onclick="showPencil()">Print Pencil</button>
   </div>
 </header>
-
+ 
 <div class="main-wrap">
   <div class="page-title">Build a Pencil <span class="badge">LIVE CALC</span></div>
-
+ 
   <div id="statusBar" class="status-bar">✓ Deal updated</div>
-
+ 
   <!-- ROW 1: Vehicle + Customer + Trade -->
   <div class="grid3" style="margin-bottom:16px">
-
+ 
     <!-- VEHICLE -->
     <div class="card">
       <div class="card-header"><span class="icon">🚗</span> Vehicle</div>
@@ -206,7 +206,7 @@
         <div class="field"><label>Add-Ons / Accessories</label><input type="text" id="addons" class="currency" placeholder="$0.00" oninput="calc()"></div>
       </div>
     </div>
-
+ 
     <!-- CUSTOMER + PRICING SUMMARY -->
     <div class="card">
       <div class="card-header"><span class="icon">📋</span> Customer & Fees</div>
@@ -228,7 +228,7 @@
         <div class="calc-row total"><span>Total Tax & Fees</span><span class="val" id="totalFees">$0.00</span></div>
       </div>
     </div>
-
+ 
     <!-- TRADE -->
     <div class="card">
       <div class="card-header"><span class="icon">🔄</span> Trade-In</div>
@@ -248,10 +248,10 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- ROW 2: Rates + Payments + Reserve -->
   <div class="grid2" style="margin-bottom:16px">
-
+ 
     <!-- RATES + PAYMENT GRID -->
     <div class="card">
       <div class="card-header"><span class="icon">📊</span> Loan Terms & Payment Grid</div>
@@ -277,7 +277,7 @@
         </div>
       </div>
     </div>
-
+ 
     <!-- RESERVE -->
     <div class="card">
       <div class="card-header"><span class="icon">💰</span> Dealer Reserve (80/20)</div>
@@ -300,10 +300,10 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- ROW 3: F&I Backend + Total Gross -->
   <div class="grid2" style="margin-bottom:16px">
-
+ 
     <!-- F&I BACKEND -->
     <div class="card">
       <div class="card-header"><span class="icon">🛡️</span> F&I Backend Products</div>
@@ -323,7 +323,7 @@
         </div>
       </div>
     </div>
-
+ 
     <!-- GROSS SUMMARY -->
     <div class="card">
       <div class="card-header"><span class="icon">📈</span> Deal Gross Summary</div>
@@ -347,13 +347,13 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- PRINT PENCIL -->
   <div id="printArea">
     <div class="print-pencil" id="pencilOut"></div>
   </div>
 </div>
-
+ 
 <script>
 const FI_PRODUCTS = [
   'VSC / Extended Warranty',
@@ -363,7 +363,7 @@ const FI_PRODUCTS = [
   'Life / Disability',
   'Other F&I Product'
 ];
-
+ 
 // Build F&I rows
 const fiContainer = document.getElementById('fiProducts');
 FI_PRODUCTS.forEach((p, i) => {
@@ -377,7 +377,7 @@ FI_PRODUCTS.forEach((p, i) => {
   `;
   fiContainer.appendChild(row);
 });
-
+ 
 function parseMoney(val) {
   if (!val) return 0;
   return parseFloat(String(val).replace(/[$,\s]/g, '')) || 0;
@@ -395,7 +395,7 @@ function pmt(rate, nper, pv) {
   const r = rate / 12;
   return (pv * r * Math.pow(1+r, nper)) / (Math.pow(1+r, nper) - 1);
 }
-
+ 
 function calc() {
   // Pricing
   const price    = parseMoney(document.getElementById('sellingPrice').value);
@@ -407,16 +407,16 @@ function calc() {
   const docFee   = 225;
   const ntf      = parseMoney(document.getElementById('ntf').value) || 300;
   const totalFees= tax + docFee + ntf;
-
+ 
   // Trade
   const acv      = parseMoney(document.getElementById('tradeACV').value);
   const payoff   = parseMoney(document.getElementById('tradePayoff').value);
   const equity   = acv - payoff;
   const cashDown = parseMoney(document.getElementById('cashDown').value);
-
+ 
   // Total financed (backend NOT included here — in payments only)
   const baseFin  = adjPrice + totalFees - equity - cashDown;
-
+ 
   // F&I backend
   let totalFI = 0;
   FI_PRODUCTS.forEach((p, i) => {
@@ -427,24 +427,24 @@ function calc() {
     document.getElementById(`fiGross${i}`).textContent = fmt(gross);
     document.getElementById(`fiGross${i}`).style.color = gross >= 0 ? 'var(--green)' : 'var(--accent)';
   });
-
+ 
   // F&I retail total (added to financed for payments)
   let fiRetailTotal = 0;
   FI_PRODUCTS.forEach((p, i) => {
     fiRetailTotal += parseMoney(document.getElementById(`fiRetail${i}`).value);
   });
   const totalFinanced = baseFin + fiRetailTotal;
-
+ 
   // Rates
   const buyRate  = parsePct(document.getElementById('buyRate').value) / 100;
   const sellRate = parsePct(document.getElementById('sellRate').value) / 100;
   const spread   = sellRate - buyRate;
   document.getElementById('rateSpread').value = (spread * 100).toFixed(3) + '%';
-
+ 
   // Terms & Down scenarios
   const termsRaw = document.getElementById('terms').value.split(',').map(t => parseInt(t.trim())).filter(t => !isNaN(t) && t > 0).slice(0,4);
   const downsRaw = document.getElementById('downScenarios').value.split(',').map(d => parseMoney(d)).filter(d => !isNaN(d)).slice(0,4);
-
+ 
   // Update display values
   document.getElementById('adjPrice').textContent = fmt(adjPrice);
   document.getElementById('taxAmt').textContent = fmt(tax);
@@ -455,21 +455,21 @@ function calc() {
   document.getElementById('cashDownDisp').textContent = fmt(cashDown);
   document.getElementById('amtFinanced').textContent = fmt(totalFinanced);
   document.getElementById('totalFIGross').textContent = fmt(totalFI);
-
+ 
   // Gross summary
   const invoice  = parseMoney(document.getElementById('invoice').value);
   const frontGross = adjPrice - invoice;
   document.getElementById('gs_adjPrice').textContent = fmt(adjPrice);
   document.getElementById('gs_invoice').textContent = fmt(invoice);
   document.getElementById('gs_frontGross').textContent = fmt(frontGross);
-
+ 
   // Payment grid
   const head = document.getElementById('pmtHead');
   const body = document.getElementById('pmtBody');
   head.innerHTML = '<th>Term</th>';
   downsRaw.forEach(d => { head.innerHTML += `<th>Down: ${fmt(d)}</th>`; });
   head.innerHTML += '<th class="rate-col">Rate</th>';
-
+ 
   body.innerHTML = '';
   termsRaw.forEach(term => {
     // Buy rate row
@@ -481,7 +481,7 @@ function calc() {
       bRow += `<td><span class="pmt-val">${fmt(p)}</span></td>`;
     });
     bRow += `<td class="rate-col">${(buyRate*100).toFixed(3)}%</td></tr>`;
-
+ 
     // Sell rate row
     let sRow = `<tr><td class="term-cell">${term} mo <span class="rate-badge sell-badge">SELL</span></td>`;
     downsRaw.forEach(d => {
@@ -490,10 +490,10 @@ function calc() {
       sRow += `<td><span class="pmt-val sell">${fmt(p)}</span></td>`;
     });
     sRow += `<td class="rate-col">${(sellRate*100).toFixed(3)}%</td></tr>`;
-
+ 
     body.innerHTML += bRow + sRow;
   });
-
+ 
   // Reserve table
   const down1 = downsRaw[0] || 0;
   const reserveBody = document.getElementById('reserveBody');
@@ -525,11 +525,11 @@ function calc() {
   document.getElementById('gb_reserve').textContent = fmt(firstReserve);
   document.getElementById('gb_fi').textContent = fmt(totalFI);
   document.getElementById('gb_total').textContent = fmt(frontGross + firstReserve + totalFI);
-
+ 
   // Store for pencil
   window._dealData = { adjPrice, totalFees, tax, equity, cashDown, totalFinanced, buyRate, sellRate, termsRaw, downsRaw, fiRetailTotal, down1, firstReserve, totalFI, frontGross };
 }
-
+ 
 function showPencil() {
   calc();
   const d = window._dealData || {};
@@ -541,13 +541,13 @@ function showPencil() {
   const mgName    = document.getElementById('mgName').value || '—';
   const tradeVeh  = document.getElementById('tradeVeh').value;
   const now       = new Date().toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
-
+ 
   // Build payment rows for pencil — SELL rate only, with down scenarios
   const { termsRaw, downsRaw, adjPrice, totalFees, equity, fiRetailTotal, sellRate } = d || {};
   let pmtHeadHtml = '<tr><th>Term</th>';
   (downsRaw||[]).forEach(dn => { pmtHeadHtml += `<th>Down: ${fmt(dn)}</th>`; });
   pmtHeadHtml += '</tr>';
-
+ 
   let pmtBodyHtml = '';
   (termsRaw||[]).forEach(term => {
     pmtBodyHtml += `<tr><td class="term">${term} Months</td>`;
@@ -558,7 +558,7 @@ function showPencil() {
     });
     pmtBodyHtml += '</tr>';
   });
-
+ 
   const pencilEl = document.getElementById('pencilOut');
   pencilEl.className = 'print-pencil active';
   pencilEl.innerHTML = `
@@ -573,7 +573,7 @@ function showPencil() {
         <div>Manager: <strong>${mgName}</strong></div>
       </div>
     </div>
-
+ 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:14px">
       <div>
         <div class="pencil-section">
@@ -602,7 +602,7 @@ function showPencil() {
         </div>
       </div>
     </div>
-
+ 
     <div class="pencil-section">
       <h3>Estimated Monthly Payments &nbsp; <span style="font-weight:400;font-size:10px">Includes all financed products</span></h3>
       <table class="pencil-pmt-grid">
@@ -611,17 +611,17 @@ function showPencil() {
       </table>
       <div class="pencil-note">* A.P.R. subject to credit approval and equity requirements. Payment includes all financed products.</div>
     </div>
-
+ 
     <div class="pencil-sig">
       <div class="sig-line"><div class="line"></div><div class="sig-label">Customer Approval</div></div>
       <div class="sig-line"><div class="line"></div><div class="sig-label">Management Approval</div></div>
     </div>
   `;
-
+ 
   pencilEl.scrollIntoView({behavior:'smooth'});
   setTimeout(() => window.print(), 300);
 }
-
+ 
 function clearDeal() {
   const inputs = document.querySelectorAll('input[type=text]');
   inputs.forEach(i => {
@@ -630,9 +630,10 @@ function clearDeal() {
   document.getElementById('pencilOut').className = 'print-pencil';
   calc();
 }
-
+ 
 // Initial calc
 calc();
 </script>
 </body>
 </html>
+ 
